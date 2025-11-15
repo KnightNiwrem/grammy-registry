@@ -73,33 +73,9 @@ export class Registry<
 
   middleware(): MiddlewareFn<RegistryFlavor<C, T>> {
     return async (ctx, next) => {
-      let storageKey: string | undefined;
-
-      if (this.storage) {
-        const rawKey = await this.getStorageKey(ctx);
-
-        if (rawKey === undefined) {
-          throw new Error(
-            "Cannot access registry data because the storage key is undefined! " +
-              "This update does not have a user ID, or you provided a custom " +
-              "storageKey/getStorageKey function that returned undefined.",
-          );
-        }
-
-        storageKey = this.prefix + rawKey;
-        const storedData = await this.storage.read(storageKey);
-
-        if (storedData !== undefined) {
-          this.hydrateStore(storedData);
-        }
-      }
-
+      // Storage options are accepted in constructor but not used yet
       ctx.registry = this;
       await next();
-
-      if (this.storage && storageKey !== undefined) {
-        await this.storage.write(storageKey, this.serializeStore());
-      }
     };
   }
 
