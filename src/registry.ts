@@ -29,7 +29,7 @@ export interface RegistryOptions<C extends Context = Context> {
    * const storage = new MemorySessionStorage<Record<string, unknown>>();
    * ```
    */
-  storage?: StorageAdapter<Record<string, unknown>>;
+  storage: StorageAdapter<Record<string, unknown>>;
 }
 
 export type RegistryFlavor<
@@ -44,9 +44,9 @@ export class Registry<
   T extends Record<string, RegistryValue<unknown>>,
 > {
   private store: T;
-  private options?: RegistryOptions<C>;
+  private options: RegistryOptions<C>;
 
-  constructor(options?: RegistryOptions<C>) {
+  constructor(options: RegistryOptions<C>) {
     this.store = {} as T;
     this.options = options;
   }
