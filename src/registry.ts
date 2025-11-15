@@ -1,8 +1,4 @@
-import {
-  Context,
-  MiddlewareFn,
-  StorageAdapter,
-} from "https://deno.land/x/grammy@v1.38.3/mod.ts";
+import { Context, MiddlewareFn, StorageAdapter } from "grammy";
 
 import { RegistryValue } from "./registry-value.ts";
 
