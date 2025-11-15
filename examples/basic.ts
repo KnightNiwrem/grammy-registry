@@ -6,7 +6,7 @@
  * 2. Run: deno run --allow-net --allow-env example.ts
  */
 
-import { Bot } from "grammy";
+import { Bot, MemorySessionStorage } from "grammy";
 import type { Context } from "grammy";
 import { Registry, type RegistryFlavor } from "../src/registry.ts";
 import { RegistryValue } from "../src/registry-value.ts";
@@ -24,7 +24,9 @@ if (!token) {
 }
 
 const bot = new Bot<RegistryContext>(token);
-const registry = new Registry<Context, MyRegistries>();
+const registry = new Registry<Context, MyRegistries>({
+  storage: new MemorySessionStorage<Record<string, unknown>>(),
+});
 bot.use(registry);
 
 bot.start();

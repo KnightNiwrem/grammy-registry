@@ -19,7 +19,7 @@ export class RegistryValue<T> {
 
   constructor(options: RegistryValueOptions<T>) {
     this.value = options.value;
-  
+
     this.stringifyFn = options.stringify ?? JSON.stringify;
     this.reviverFn = options.reviver ?? JSON.parse;
   }
